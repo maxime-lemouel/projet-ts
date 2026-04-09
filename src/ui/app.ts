@@ -1,5 +1,5 @@
 import { fetchActions } from "../api/api.js"
-import { renderChart } from "../charts/chart.js"
+import { renderChartLine, renderChartBar } from "../charts/chart.js"
 import { Action } from "../models/actions.js"
 
 
@@ -66,6 +66,8 @@ async function loadAndRender(): Promise<void> {
     try {
         const symbol = (document.getElementById("stock1") as HTMLSelectElement).value
         const period = (document.getElementById("period") as HTMLSelectElement).value
+        const chartType = (document.getElementById("chart-type") as HTMLSelectElement).value as "line" | "bar"
+
 
 
         const action1 = allActions.find((a) => a.symbol === symbol)!
@@ -77,8 +79,10 @@ async function loadAndRender(): Promise<void> {
         if (filtered1.history.length === 0 ) {
             throw new Error("Aucune donnée disponible pour cette période.")
         }
+        else if (chartType === "line") renderChartLine([filtered1])
 
-        renderChart([filtered1])
+        else renderChartBar([filtered1])    
+       // renderChart([filtered1])
 
     } catch (e) {
         showError(e instanceof Error ? e.message : "Erreur inconnue")
