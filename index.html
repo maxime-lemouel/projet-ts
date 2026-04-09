@@ -2,35 +2,46 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Restaurant Menu App</title>
+    <title>MyBourse</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap pour un minimum de style -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body class="bg-light">
 
-<div class="container py-5">
+<div class="container py-4">
+    <h1 class="text-center mb-4">MyBourse</h1>
 
-    <h1 class="text-center mb-5">LES ACTIONS</h1>
+    <div class="card shadow mb-4">
+        <div class="card-body d-flex flex-wrap gap-3 align-items-end">
 
-    <div class="row">
-
-        <!-- charts -->
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-body">
-
-                    <canvas id="myChart"></canvas>
-
-                </div>
+            <div>
+                <label class="form-label fw-bold">Action</label>
+                <select id="stock1" class="form-select"></select>
             </div>
+
+            <div>
+                <label class="form-label fw-bold">Période</label>
+                <select id="period" class="form-select">
+                    <option value="1w">1 semaine</option>
+                    <option value="1m" selected>1 mois</option>
+                    <option value="1y">1 an</option>
+                </select>
+            </div>
+
+            <button id="load-btn" class="btn btn-primary">Charger</button>
+        </div>
+    </div>
+
+    <div id="loader" class="text-center text-muted mb-3" style="display:none">Chargement...</div>
+    <div id="error-box" class="alert alert-danger" style="display:none"></div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <canvas id="myChart"></canvas>
         </div>
     </div>
 </div>
 
-<!-- Script compilé depuis TypeScript -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module" src="dist/ui/app.js"></script>
 
