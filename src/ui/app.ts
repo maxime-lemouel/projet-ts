@@ -1,4 +1,4 @@
-import {Action, History} from "./actions"
+import {Action, History} from "../models/actions"
 /*
 import {User, TropPauvreErreur} from "./user.js"
 
@@ -75,7 +75,7 @@ function handleOrder(meal: Meal): void {
         }
     }
 }
-*/
+
 function renderMeals(actions: Action[]): void {
 
     const mealList = document.getElementById("mealList") as HTMLUListElement
@@ -102,7 +102,7 @@ function renderMeals(actions: Action[]): void {
         mealList.appendChild(li)
     })
 }
-/*
+
 function setupPriceFilter(): void {
     const slider = document.getElementById("priceFilter") as HTMLInputElement
     const label  = document.getElementById("filterValue") as HTMLElement
