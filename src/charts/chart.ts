@@ -7,9 +7,8 @@ let chartInstance: any = null
 
 export type ChartType = "line" | "bar"
 
-export function renderChartLine(actions: Action[], chartType: ChartType = "line"): void {
-    const canvas = document.getElementById("myChart") as HTMLCanvasElement
-    const ctx = canvas.getContext("2d")!
+export function renderChartLine(actions: Action[]): void {
+    const chartType = "line"
 
     // Détruire l'ancien graphique pour éviter les doublons
     if (chartInstance) {
@@ -17,7 +16,7 @@ export function renderChartLine(actions: Action[], chartType: ChartType = "line"
         chartInstance = null
     }
 
-    const colors = ["#3b82f6", "#ef4444"]
+    const colors = ["#3b82f6", "#ef4444","#008000","#FFFF00"]
 
     const datasets = actions.map((action, i) => ({
         label: `${action.name} (${action.symbol})`,
@@ -47,17 +46,16 @@ export function renderChartLine(actions: Action[], chartType: ChartType = "line"
     })
 }
 
-export function renderChartBar(actions: Action[], chartType: ChartType = "bar"): void {
-    
-    
-    
+export function renderChartBar(actions: Action[]): void {
+    const chartType = "bar"
+
    // Détruire l'ancien graphique pour éviter les doublons
     if (chartInstance) {
         chartInstance.destroy()
         chartInstance = null
     }
 
-    const colors = ["#3b82f6", "#ef4444"]
+    const colors = ["#3b82f6", "#ef4444","#008000","#FFFF00"]
 
     const datasets = actions.map((action, i) => ({
         label: `${action.name} (${action.symbol})`,
