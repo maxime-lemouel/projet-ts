@@ -22,7 +22,7 @@ export function renderChartLine(actions: Action[]): void {
         label: `${action.name} (${action.symbol})`,
         data: action.history.map((h) => h.price),
         borderColor: colors[i],
-        backgroundColor: colors[i] + "33",
+        backgroundColor: colors[i] + "10",
         tension: 0.3,
         fill: chartType === "line",
     }))
@@ -61,7 +61,7 @@ export function renderChartBar(actions: Action[]): void {
         label: `${action.name} (${action.symbol})`,
         data: action.history.map((h) => h.price),
         borderColor: colors[i],
-        backgroundColor: colors[i] + "33",
+        backgroundColor: colors[i] + "90",
         tension: 0.3,
         fill: chartType === "bar",
     }))

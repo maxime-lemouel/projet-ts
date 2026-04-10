@@ -46,7 +46,7 @@ function populateSelect(actions: Action[]): void {
     select.innerHTML = ""
     const opt = document.createElement("option")
     opt.value = "null"
-    opt.textContent = `vide`
+    opt.textContent = `Séléctionner une action`
     select.appendChild(opt)
     actions.forEach((action) => {
         const opt = document.createElement("option")
@@ -113,14 +113,27 @@ async function loadAndRender(): Promise<void> {
     setLoading(true)
 
     try {
-        const symbols = getSelectedSymbols()
+        var symbols = getSelectedSymbols()
         const period = (document.getElementById("period") as HTMLSelectElement).value
         const chartType = (document.getElementById("chart-type") as HTMLSelectElement).value as "line" | "bar"
 
+        const symbolsNotNull =[]
+        for (const symbol of symbols) {
+            if (symbol != "null"){
+                symbolsNotNull.push(symbol)
+            }
+        }
+        symbols = symbolsNotNull;
+        if (symbols.length === 0) {
+            throw new Error("selectioner au moins une action")
+        }
+
         const filtered = symbols.map(symbol => {
+
             const action = allActions.find(a => a.symbol === symbol)
             if (!action) throw new Error(`Action introuvable : ${symbol}`)
             return filterByPeriod(action, period)
+
         })
 
         if (filtered.some(f => f.history.length === 0)) {
