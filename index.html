@@ -1,78 +1,109 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>MyBourse</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>MyBourse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  
+  <style>
+    body.dark-mode {
+      background-color: #1a1a2e !important;
+      color: #e0e0e0;
+    }
+    body.dark-mode .card {
+      background-color: #FFFFFF;
+      border-color: #0f3460;
+    }
+    body.dark-mode .form-select,
+    body.dark-mode .form-control {
+      background-color: #0f3460;
+      color: #e0e0e0;
+      border-color: #444;
+    }
+    body.dark-mode .navbar {
+      background-color: #16213e !important;
+      border-color: #0f3460 !important;
+    }
+    body.dark-mode .text-muted {
+      color: #aaa !important;
+    }
+    body.dark-mode .btn-outline-secondary {
+      color: #e0e0e0;
+      border-color: #aaa;
+    }
+  </style>
+
 </head>
+
 <body class="bg-light">
 
+  
+  <nav class="navbar bg-white border-bottom px-4 d-flex justify-content-between align-items-center">
+    <span class="fw-bold fs-5">MyBourse</span>
+    <button id="dark-toggle" class="btn btn-outline-secondary btn-sm">🌙 Mode sombre</button>
+  </nav>
+  
+
 <div class="container py-4">
-    <h1 class="text-center mb-4">MyBourse</h1>
 
-    <div class="card shadow mb-4">
-        <div class="card-body d-flex flex-wrap gap-3 align-items-end">
-
-            <div id="single-select-form">
-                <label class="form-label fw-bold">Action*</label>
-                <select id="action1" class="form-select"></select>
-            </div>
-
-            <div id="multi-select-form" style="display:none;">
-                <label class="form-label fw-bold">Actions</label>
-                <div class="d-flex flex-wrap gap-2">
-                    <div>
-                        <small class="text-muted">Action 1*</small>
-                        <select id="action-c1" class="form-select"></select>
-                    </div>
-                    <div>
-                        <small class="text-muted">Action 2</small>
-                        <select id="action-c2" class="form-select"></select>
-                    </div>
-                    <div>
-                        <small class="text-muted">Action 3</small>
-                        <select id="action-c3" class="form-select"></select>
-                    </div>
-                    <div>
-                        <small class="text-muted">Action 4</small>
-                        <select id="action-c4" class="form-select"></select>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <label class="form-label fw-bold">Période</label>
-                <select id="period" class="form-select">
-                    <option value="1w">1 semaine</option>
-                    <option value="1m" selected>1 mois</option>
-                    <option value="1y">1 an</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="form-label fw-bold">Type de graphique</label>
-                <select id="chart-type" class="form-select">
-                    <option value="line">Ligne</option>
-                    <option value="bar">Barres</option>
-                </select>
-            </div>
-
-            <div class="d-flex gap-2">
-                <button id="comparer-btn" class="btn btn-outline-secondary">Comparer</button>
-                <button id="load-btn" class="btn btn-primary">Charger</button>
-            </div>
+  <div class="card shadow mb-4">
+    <div class="card-body d-flex flex-wrap gap-3 align-items-end">
+      <div id="single-select-form">
+        <label class="form-label fw-bold">Action*</label>
+        <select id="action1" class="form-select"></select>
+      </div>
+      <div id="multi-select-form" style="display:none;">
+        <label class="form-label fw-bold">Actions</label>
+        <div class="d-flex flex-wrap gap-2">
+          <div>
+            <small class="text-muted">Action 1*</small>
+            <select id="action-c1" class="form-select"></select>
+          </div>
+          <div>
+            <small class="text-muted">Action 2</small>
+            <select id="action-c2" class="form-select"></select>
+          </div>
+          <div>
+            <small class="text-muted">Action 3</small>
+            <select id="action-c3" class="form-select"></select>
+          </div>
+          <div>
+            <small class="text-muted">Action 4</small>
+            <select id="action-c4" class="form-select"></select>
+          </div>
         </div>
+      </div>
+      <div>
+        <label class="form-label fw-bold">Période</label>
+        <select id="period" class="form-select">
+          <option value="1w">1 semaine</option>
+          <option value="1m" selected>1 mois</option>
+          <option value="1y">1 an</option>
+        </select>
+      </div>
+      <div>
+        <label class="form-label fw-bold">Type de graphique</label>
+        <select id="chart-type" class="form-select">
+          <option value="line">Ligne</option>
+          <option value="bar">Barres</option>
+        </select>
+      </div>
+      <div class="d-flex gap-2">
+        <button id="comparer-btn" class="btn btn-outline-secondary">Comparer</button>
+        <button id="load-btn" class="btn btn-primary">Charger</button>
+      </div>
     </div>
+  </div>
 
-    <div id="error-box" class="alert alert-danger" style="display:none"></div>
-
-    <div class="card shadow">
-        <div class="card-body">
-            <div id="loader" class="text-center text-muted mb-3" style="display:none">Chargement...</div>
-            <canvas id="myChart"></canvas>
-        </div>
+  <div id="error-box" class="alert alert-danger" style="display:none"></div>
+  <div class="card shadow">
+    <div class="card-body">
+      <div id="loader" class="text-center text-muted mb-3" style="display:none">Chargement...</div>
+      <canvas id="myChart"></canvas>
     </div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

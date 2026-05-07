@@ -167,3 +167,19 @@ async function main(): Promise<void> {
 }
 
 main()
+
+
+const darkToggleBtn = document.getElementById('dark-toggle') as HTMLButtonElement;
+ 
+
+if (localStorage.getItem('darkMode') === 'true') {
+  document.body.classList.add('dark-mode');
+  darkToggleBtn.textContent = '☀️ Mode clair';
+}
+ 
+
+darkToggleBtn.addEventListener('click', () => {
+  const isDark = document.body.classList.toggle('dark-mode');
+  darkToggleBtn.textContent = isDark ? '☀️ Mode clair' : '🌙 Mode sombre';
+  localStorage.setItem('darkMode', String(isDark));
+});
